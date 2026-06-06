@@ -30,7 +30,7 @@ class MeasurementCreate(BaseModel):
     o3: Optional[float] = Field(None, ge=0, le=1000, description="Ozono O3 en ppb")
     source: Optional[str] = Field("US Embassy Guatemala City", max_length=100)
 
-    @field_validator("date")
+    @field_validator("fecha")
     @classmethod
     def date_not_future(cls, v: date) -> date:
         if v > date.today():
