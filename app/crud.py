@@ -60,7 +60,7 @@ def get_daily_average(db: Session, measurement_date: date) -> Optional[dict]:
         return round(float(val), 2) if val is not None else None
 
     return {
-        "date": measurement_date,
+        "fecha": measurement_date,
         "total_records": row.total_records,
         "pm25_avg": _round(row.pm25_avg),
         "pm10_avg": _round(row.pm10_avg),
