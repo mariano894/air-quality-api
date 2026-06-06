@@ -24,7 +24,7 @@ def _pm25_aqi_category(value: Optional[float]) -> Optional[str]:
 # ─── Request schemas ─────────────────────────────────────────────────────────
 
 class MeasurementCreate(BaseModel):
-    date: date = Field(..., description="Fecha de la medición (YYYY-MM-DD)")
+    fecha: date = Field(..., description="Fecha de la medición (YYYY-MM-DD)")
     pm25: Optional[float] = Field(None, ge=0, le=1000, description="PM2.5 en µg/m³")
     pm10: Optional[float] = Field(None, ge=0, le=1000, description="PM10 en µg/m³")
     o3: Optional[float] = Field(None, ge=0, le=1000, description="Ozono O3 en ppb")
@@ -40,7 +40,7 @@ class MeasurementCreate(BaseModel):
     model_config = {
         "json_schema_extra": {
             "example": {
-                "date": "2025-06-01",
+                "fecha": "2025-06-01",
                 "pm25": 28.5,
                 "pm10": 45.0,
                 "o3": 12.0,
@@ -58,7 +58,7 @@ class MeasurementBulkCreate(BaseModel):
 
 class MeasurementOut(BaseModel):
     id: int
-    date: date
+    fecha: date
     pm25: Optional[float]
     pm10: Optional[float]
     o3: Optional[float]
@@ -84,7 +84,7 @@ class MeasurementListOut(BaseModel):
 
 
 class DailyAverageOut(BaseModel):
-    date: date
+    fecha: date
     total_records: int
     pm25_avg: Optional[float] = Field(None, description="Promedio PM2.5 µg/m³")
     pm10_avg: Optional[float] = Field(None, description="Promedio PM10 µg/m³")
@@ -94,7 +94,7 @@ class DailyAverageOut(BaseModel):
     model_config = {
         "json_schema_extra": {
             "example": {
-                "date": "2025-06-01",
+                "fecha": "2025-06-01",
                 "total_records": 3,
                 "pm25_avg": 31.2,
                 "pm10_avg": 48.7,

@@ -23,16 +23,16 @@ def get_measurements(
     query = db.query(Measurement)
 
     if date_from:
-        query = query.filter(Measurement.date >= date_from)
+        query = query.filter(Measurement.fecha >= date_from)
     if date_to:
-        query = query.filter(Measurement.date <= date_to)
+        query = query.filter(Measurement.fecha <= date_to)
     if year:
-        query = query.filter(extract("year", Measurement.date) == year)
+        query = query.filter(extract("year", Measurement.fecha) == year)
     if month:
-        query = query.filter(extract("month", Measurement.date) == month)
+        query = query.filter(extract("month", Measurement.fecha) == month)
 
     total = query.count()
-    results = query.order_by(Measurement.date.desc()).offset(skip).limit(limit).all()
+    results = query.order_by(Measurement.fecha.desc()).offset(skip).limit(limit).all()
     return total, results
 
 
@@ -49,7 +49,7 @@ def get_daily_average(db: Session, measurement_date: date) -> Optional[dict]:
             func.avg(Measurement.pm10).label("pm10_avg"),
             func.avg(Measurement.o3).label("o3_avg"),
         )
-        .filter(Measurement.date == measurement_date)
+        .filter(Measurement.fecha == measurement_date)
         .one()
     )
 
