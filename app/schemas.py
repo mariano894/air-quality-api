@@ -29,6 +29,8 @@ class MeasurementCreate(BaseModel):
     pm10: Optional[float] = Field(None, ge=0, le=1000, description="PM10 en µg/m³")
     o3: Optional[float] = Field(None, ge=0, le=1000, description="Ozono O3 en ppb")
     source: Optional[str] = Field("US Embassy Guatemala City", max_length=100)
+    temperature: Optional[float] = Field(None, ge=-100, le=100,  description="Temperatura en °C")
+    humidity: Optional[float] = Field(None, ge=0,    le=100, description="Humedad ambiente")
 
     @field_validator("fecha")
     @classmethod
@@ -63,6 +65,8 @@ class MeasurementOut(BaseModel):
     pm10: Optional[float]
     o3: Optional[float]
     source: Optional[str]
+    temperature: Optional[float]
+    humidity: Optional[float]
     pm25_category: Optional[str] = None
     created_at: datetime
     updated_at: datetime
@@ -89,6 +93,8 @@ class DailyAverageOut(BaseModel):
     pm25_avg: Optional[float] = Field(None, description="Promedio PM2.5 µg/m³")
     pm10_avg: Optional[float] = Field(None, description="Promedio PM10 µg/m³")
     o3_avg: Optional[float] = Field(None, description="Promedio O3 ppb")
+    temperature_avg: Optional[float] = Field(None, description="Promedio Temperatura °C")
+    humidity_avg: Optional[float] = Field(None, description="Promedio Humedad")
     pm25_category: Optional[str] = Field(None, description="Categoría AQI basada en promedio PM2.5")
 
     model_config = {

@@ -48,6 +48,8 @@ def get_daily_average(db: Session, measurement_date: date) -> Optional[dict]:
             func.avg(Measurement.pm25).label("pm25_avg"),
             func.avg(Measurement.pm10).label("pm10_avg"),
             func.avg(Measurement.o3).label("o3_avg"),
+            func.avg(Measurement.temperature).label("temperature_avg"),
+            func.avg(Measurement.humidity).label("humidity_avg"),
         )
         .filter(Measurement.fecha == measurement_date)
         .one()
@@ -65,6 +67,8 @@ def get_daily_average(db: Session, measurement_date: date) -> Optional[dict]:
         "pm25_avg": _round(row.pm25_avg),
         "pm10_avg": _round(row.pm10_avg),
         "o3_avg": _round(row.o3_avg),
+        "temperature_avg": _round(row.temperature_avg),
+        "humidity_avg": _round(row.humidity_avg),
     }
 
 

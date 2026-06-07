@@ -11,5 +11,7 @@ class Measurement(Base):
     pm10 = Column(Float, nullable=True, comment="Material particulado grueso PM10 (µg/m³)")
     o3 = Column(Float, nullable=True, comment="Ozono troposférico O3 (ppb)")
     source = Column(String(100), nullable=True, default="US Embassy Guatemala City", comment="Fuente de los datos")
+    temperature = Column(Float, nullable=True, comment="Temperatura en °C")
+    humidity = Column(Float, nullable=True, comment="Humedad ambiente")
     created_at = Column(DateTime, server_default=func.now(), comment="Fecha de inserción del registro")
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now(), comment="Última actualización")
